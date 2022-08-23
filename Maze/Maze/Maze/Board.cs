@@ -8,9 +8,11 @@ namespace Maze
     class Board
     {
         const char CIRCLE = '\u25cf';
-
         public TileType[,] Tile { get; private set; }
         public int Size { get; private set; }
+
+        public int DestX { get; private set; }
+        public int DestY { get; private set; }
 
 
         Player mPlayer;
@@ -31,6 +33,9 @@ namespace Maze
             Tile = new TileType[size, size];
             Size = size;
             mPlayer = player;
+
+            DestX = Size - 2;
+            DestY = Size - 2;
 
             //GenerateByBinaryTree();
             GenerateBySideWinder();
@@ -141,6 +146,8 @@ namespace Maze
                 {
                     if (x == mPlayer.PosX && y == mPlayer.PosY)
                         Console.ForegroundColor = ConsoleColor.Blue;
+                    else if (x == DestX && y == DestY)
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                     else
                         Console.ForegroundColor = GetTileColor(Tile[y, x]);
                     Console.Write(CIRCLE);
