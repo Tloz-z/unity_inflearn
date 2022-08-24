@@ -75,8 +75,10 @@ namespace Maze
             while (parent[y, x, 0] != y || parent[y, x, 1] != x)
             {
                 mPoints.Add(new int[] { y, x });
-                y = parent[y, x, 0];
-                x = parent[y, x, 1];
+                int tempY = y;
+                int tempX = x;
+                y = parent[tempY, tempX, 0];
+                x = parent[tempY, tempX, 1];
             }
             mPoints.Add(new int[] { y, x });
             mPoints.Reverse();
@@ -124,6 +126,7 @@ namespace Maze
             if (mSumTick >= MOVE_TICK)
             {
                 mSumTick = 0;
+
 
                 PosY = mPoints[mLastIndex][0];
                 PosX = mPoints[mLastIndex][1];
